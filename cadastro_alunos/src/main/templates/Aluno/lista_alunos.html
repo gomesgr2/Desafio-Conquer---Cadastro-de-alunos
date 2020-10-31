@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="materialize/css/materialize.min.css"
+      media="screen,projection"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body >
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo center">Tabela de alunos cadastrados</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down"></ul>
+          <li><a class="waves-effect waves-light btn" href = "/cadastro_alunos">Cadastre um aluno</a></li>
+        </div>
+
+      </nav>
+    </header>
+    <div style = "text-align:center; ;">
+      <h1 style = "font-size: 2.5rem"></h1>
+    </div>
+    <table class="container">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Idade</th>
+          <th>Deletar</th>
+          <th>Editar</th>
+      </thead>
+      <tbody>
+        <tr th:each="aluno : ${aluno}">
+          <td><span th:text="${aluno.nome}"></span></td>
+          <td><span th:text="${aluno.email}"></span></td>
+          <td><span th:text="${aluno.idade}"></span></td>
+          <td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('AC#deletar_aluno').arg(0, aluno.codigo)).build()}" th:onclick="'return confirm(\'Deseja excluir esse contato?\')'"><i class="material-icons left">delete</i></a></td>
+          <td><a class="waves-effect waves-light btn-small" th:href="@{'/editar/' + ${aluno.codigo}}" ><i class="material-icons left">edit</i></a></td>
+        </tr>
+      </tbody>
+
+    </table>
+  </body>
+  <script
+    type="text/javascript"
+    src="materialize/js/materialize.min.js"
+  ></script>
+  <script> 
+  function confirmar(e){
+                
+                if(!confirm("Deseja excluir esse contato?")){
+                                        
+                    e.preventDefault();
+                }
+            }
+            
+  </script>
+</html>
