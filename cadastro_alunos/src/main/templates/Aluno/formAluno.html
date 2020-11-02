@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <title>Escola Conquer - Cadastro aluno</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="materialize/css/materialize.min.css"
+      media="screen,projection"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <h1 style="text-align: center">Cadastro de Alunos</h1>
+    
+    <div class = "container formAluno">
+    <form method="post" class="container" name = "f1">
+      Nome :<input type="text" value="" name="nome"  />
+      <div class="row">
+        <div class="row">
+          Idade :<input type="number" value="" name="idade" />
+        </div>
+        <div class="row" >
+          Email :<input type="text" value="" name="email" onblur="checarEmail(f1.email);" />
+        </div>
+        <p id="msgemail"></p>
+      </div>
+      <div class="row">
+      <button type="submit" class="waves-effect waves-light btn-large">
+        <i class="material-icons left">person_add</i>Cadastrar
+      </button>
+      <th:block th:include="mensagemValidacao"></th:block>
+      <h3><a class="waves-effect waves-light btn" href = "/lista_alunos" ><i class="material-icons left">arrow_forward
+      </i>Veja os alunos já cadastrados no sistema</a></h3>
+    </form>
+  </div>
+    
+
+
+  </body>
+  <script
+    type="text/javascript"
+    src="materialize/js/materialize.min.js"
+    
+  ></script>
+  <script> function checarEmail(field){
+    usuario = field.value.substring(0, field.value.indexOf("@"));
+dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
+
+if ((usuario.length >=1) &&
+    (dominio.length >=3) &&
+    (usuario.search("@")==-1) &&
+    (dominio.search("@")==-1) &&
+    (usuario.search(" ")==-1) &&
+    (dominio.search(" ")==-1) &&
+    (dominio.search(".")!=-1) &&
+    (dominio.indexOf(".") >=1)&&
+    (dominio.lastIndexOf(".") < dominio.length - 1)) {
+document.getElementById("msgemail").innerHTML="<font color='green'>E-mail válido </font>";
+}
+else{
+document.getElementById("msgemail").innerHTML="<font color='red'>E-mail inválido </font>";
+alert("E-mail invalido");
+}
+}
+  
+      </script>
